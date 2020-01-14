@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	
+	<!-- 配置目标对象 -->
+	<bean id="calculator" class="com.atguigu.pojo.Calculator"></bean>
+	<!-- 配置切面类实例 -->
+	<bean id="logUtils" class="com.atguigu.pojo.utils.LogUtils"></bean>
+	
+	
+	<!-- 配置切面 -->
+	<aop:config>
+			<!-- 配置谁是切面 -->
+			<!--  -->
+		<aop:aspect id="aspect1" ref="logUtils">
+		<!-- 定义复用的切入点 -->
+		<aop:pointcut expression="execution(public * com.atguigu.*.Calculator.*(..))" id="pointcut1"/>
+			<!-- 配置前置通知 -->
+			<aop:before method="logBefore" pointcut="execution(public * com.atguigu.*.Calculator.*(..))" />
+			<!-- 配置后置通知 -->
+			<aop:after method="logAfter" pointcut="execution(public * com.atguigu.*.Calculator.*(..))"/>
+			<!-- 配置异常通知 -->
+			<aop:after-throwing method="logAfterThrowing" pointcut-ref="pointcut1" throwing="e" />
+			<!-- 配置返回值通知 -->
+			<aop:after-returning method="logAfterReturning" pointcut-ref="pointcut1" returning="result" />
+		</aop:aspect>
+	</aop:config>
+
+</beans>

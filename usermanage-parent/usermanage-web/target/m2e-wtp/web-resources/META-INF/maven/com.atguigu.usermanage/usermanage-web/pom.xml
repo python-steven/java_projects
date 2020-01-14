@@ -1,0 +1,128 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.atguigu.usermanage</groupId>
+    <artifactId>usermanage-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>usermanage-web</artifactId>
+  <packaging>war</packaging>
+  
+ <dependencies>
+		<dependency>
+			<groupId>com.atguigu.usermanage</groupId>
+			<artifactId>usermanage-service</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+		</dependency>
+  
+  
+  <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+
+		<!-- 运行时依赖 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+
+		<!-- 运行时依赖 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+
+		<!-- 运行时依赖 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+		</dependency>
+		
+		<!-- 运行时依赖 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<!-- 运行时依赖 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		
+		<!-- 运行时依赖 -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+		</dependency>
+
+		<!-- JSP相关 -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<!-- 
+					JAXB API是java EE 的API，因此在java SE 9.0 中不再包含这个 Jar 包。
+					java 9 中引入了模块的概念，默认情况下，Java SE中将不再包含java EE 的Jar包
+					而在 java 6/7 / 8 时关于这个API 都是捆绑在一起的
+			
+			 -->
+			<dependency>
+			  <groupId>javax.xml.bind</groupId>
+			  <artifactId>jaxb-api</artifactId>
+			  <version>2.3.0</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.sun.xml.bind</groupId>
+			  <artifactId>jaxb-impl</artifactId>
+			  <version>2.3.0</version>
+			</dependency>
+			<dependency>
+			  <groupId>com.sun.xml.bind</groupId>
+			  <artifactId>jaxb-core</artifactId>
+			  <version>2.3.0</version>
+			</dependency>
+			<dependency>
+			  <groupId>javax.activation</groupId>
+			  <artifactId>activation</artifactId>
+			  <version>1.1.1</version>
+			</dependency>
+
+	</dependencies>
+	<build>
+		<plugins>
+			<!-- 配置Tomcat插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<configuration>
+					<charset>utf8</charset>
+					<!-- 配置它之后，不需要项目名就可以访问 -->
+					<path>/</path>
+					<!-- 配置端口 -->
+					<port>8282</port>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+  
+</project>

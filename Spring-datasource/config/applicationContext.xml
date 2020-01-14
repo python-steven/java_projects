@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+<!-- 这里是初认识applicationContext 的认知 -->
+	<!-- bean 标签用来配置一个对象  bean就是对象  -->
+<!-- 	<bean id="p1" class="com.atgugui.pojo.Person1"> -->
+		<!-- property 配置属性值              name属性名 设置值     value 属性值 -->
+<!-- 		<property name="id" value="1"></property> -->
+<!-- 		<property name="name" value="steven"></property> -->
+<!-- 		<property name="age" value="18"></property> -->
+<!-- 		<property name="phone" value="18888888888"></property> -->
+<!-- 	</bean> -->
+	
+	
+
+<!-- 	<bean id="p2" class="com.atgugui.pojo.Person1"> -->
+		<!-- constructor-arg 标签是指通过构造器赋值 name    value 参数值 -->
+<!-- 		<constructor-arg name="id" value="22"></constructor-arg> -->
+<!-- 		<constructor-arg name="name" value="wastron"></constructor-arg> -->
+<!-- 		<constructor-arg name="age" value="99"></constructor-arg> -->
+<!-- 		<constructor-arg name="phone" value="18887888888"></constructor-arg> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="p3" class="com.atgugui.pojo.Person1"> -->
+<!-- public Person(Integer id, String name, String phone, Integer age)			index 属性设置参数的索引0		第一个参数 -->
+<!-- 			1		第二个参数 -->
+<!-- 			。。。。。。 以此类推 -->
+<!-- 			n        第n+1个参数 -->
+<!-- 		这里是通过自己写的有参构造器来设置相对应的数值参数和属性  这样达到控制的效果    -->
+<!-- 		 --> 
+<!-- 		<constructor-arg index="0" value="33"></constructor-arg> -->
+<!-- 		<constructor-arg index="1" value="steven4"></constructor-arg> -->
+<!-- 		<constructor-arg index="2" value="18887888988"></constructor-arg> -->
+<!-- 		<constructor-arg index="3" value="99"></constructor-arg> -->
+<!-- 	</bean> -->
+	
+	
+	<!-- 通过p来设置值 -->
+<!-- 	<bean id="p4" class="com.atgugui.pojo.Person1" p:id="4" p:name="p名称空间" p:phone="123456789" p:age="88" /> -->
+	
+	
+	
+	
+	
+	
+	<!-- ref 的使用bean兑对象 -->
+	<bean id="carr" class="com.atgugui.pojo.Car">
+		<property name="carNo" value="京B23421"></property>
+		<property name="name" value="奔池"/>
+	</bean>
+	
+	
+	<bean id="p8" class="com.atgugui.pojo.Person">
+		<property name="id" value="8"/>
+		<property name="name" value="国哥" />
+		<!-- ref属性通过设置id值，将指定的bean对象赋值给属性-->
+		<property name="car" ref="carr"/>
+	</bean>
+	
+	
+	
+	
+	<!-- 内部bean 对象的设置 -->
+	<bean id="p9" class="com.atgugui.pojo.Person">
+		<property name="id" value="9" />
+		<property name="name" value="p9" />
+		<property name="car">
+			<!-- 内部bean，内部bean只能作为 赋值使用。不能通过容器获取 -->
+			<bean id="car02" class="com.atgugui.pojo.Car">
+				<property name="carNo" value="京B23421" />
+				<property name="name" value="奔池"/>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	
+	<!-- list 对象添加多个对象的方法以及可以添加bean对象  内部的 -->
+	<bean id="p10" class="com.atgugui.pojo.Person">
+		<property name="id" value="10" />
+		<property name="name" value="p10闪存门"/>
+		<property name="list">
+			<!-- list标签表示配置一个集合赋值属性 -->
+			<list>
+				<value>item1</value>
+				<value>item2</value>
+				<value>item3</value>
+				<!-- 内部bean，内部bean只能作为 赋值使用。不能通过容器获取 -->
+				<bean id="car03" class="com.atgugui.pojo.Car">
+					<property name="carNo" value="京B23421" />
+					<property name="name" value="奔池"/>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	
+	
+	
+	<!-- map 标签的属性赋值和添加对象 -->
+	<bean id="p11" class="com.atgugui.pojo.Person">
+		<property name="id" value="11" />
+		<property name="name" value="p11" />
+		<property name="map">
+			<!-- map标签表示配置一个map集合给属性赋值   -->
+			<map>
+				<!-- entry是map集合中的每一项 -->
+				<entry key="key1" value="value1" />
+				<entry key="key2" value="value2" />
+				<entry key="key3" value-ref="carr" />
+			</map>
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+	<!-- Properties 对象的添加 -->
+	<bean id="p12" class="com.atgugui.pojo.Person">
+		<property name="id" value="12" />
+		<property name="props">
+			<!-- props标签表示配置Properties类型给属性赋值                    attribute -->
+			<props>
+				<prop key="user">root</prop>
+				<prop key="password">root</prop>
+				<prop key="driver">com.mysql.jdbc.Driver</prop>
+				<prop key="url">jdbc:mysql://localhost:3306/test</prop>
+			</props>
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	<!-- set集合的属性的添加   attribute -->
+	<bean id="pset" class="com.atgugui.pojo.Person">
+		<property name="id" value="100" />
+		<property name="set">
+			<!-- set标签配置一个Set集合赋值给属性           set-->
+			<set>
+				<!-- value 表示集合中一个字符串值       value-->
+				<value>value1</value>
+				<value>value2</value>
+				<!-- ref 表示引用一个bean对象 -->
+				<ref bean="carr"/>
+			</set>
+		</property>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 使用util名称空间定义一个公共的，可供别人引用的list集合 -->
+	<util:list id="list01">
+		<value>list1</value>
+		<value>list2</value>
+		<value>list3</value>
+		<value>list4</value>
+	</util:list>
+	<bean id="p13" class="com.atgugui.pojo.Person">
+		<property name="id" value="13"></property>
+		<!-- 把list01的id对象。赋值给list属性  List -->
+		<property name="list" ref="list01"></property>
+	</bean>
+	
+	
+	
+	<!-- 级联属性的获取值 -->
+	<bean id="carcar" class="com.atgugui.pojo.Car">
+		<property name="carNo" value="京B531212" />
+		<property name="name" value="冰利"/>
+	</bean>
+	<bean id="p14" class="com.atgugui.pojo.Person">
+		<property name="id" value="14" />
+		<property name="car" ref="carcar"></property>
+		<!-- spring中可以使用级联属性方式赋值，但，赋值前这个子对象一定要先有值 -->
+		<property name="car.carNo" value="京A123412"/>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 配置调用静态工厂方法创建Bean对象                    class 配置工厂类的全类名                 factory-method 调用工厂类的哪个方法         factory -->
+	<bean id="p15" class="com.atgugui.factory.PersonFactory" factory-method="createPerson" />
+	
+	
+	
+	
+	
+	
+	
+					<!--       1、在spring容器中创建一个bean对象                                  2、配置调用工厂实例的方法            -->
+	<bean id="personFactory" class="com.atgugui.factory.PersonFactory"/>
+					<!-- 
+						class属性和factory-method组合是静态工厂方法
+						factory-bean 和 factory-method 组合是工厂实例方法		
+						factory-bean 使用哪个bean对象做为工厂实例
+						factory-method 调用工厂类实例的哪个方法
+					 -->
+	<bean id="p16" factory-bean="personFactory" factory-method="createPerson2"></bean>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+			<!-- 
+					如果指定的Class是实现了Spring的FactoryBean接口，
+					Spring容器本身会自动的判断，如果有实现这个FactoryBean接口，
+					创建对象的时候，就会调用 getObject()返回对象
+			 -->
+			 <!-- 这里会调用PersonFactryBean 里面的getObject方法去获取对应的对象     facotryBean -->
+	<bean id="p17" class="com.atgugui.factory.PersonFacotryBean"></bean>
+	
+	
+	
+	
+	
+	
+	
+	<!-- abstract="true"表示这个bean，不能被实例化，而只能被继承使用     abstract-->
+	<bean id="parent" class="com.atgugui.pojo.Person" abstract="true">
+		<property name="id" value="100" />
+		<property name="name" value="我是父亲" />
+		<property name="list">
+			<list>
+				<value>list1</value>
+				<value>list2</value>
+				<value>list3</value>
+			</list>
+		</property>
+	</bean>
+	<!-- parent属性设置你要继承哪个id的配置 -->
+	<bean id="p18" class="com.atgugui.pojo.Person" parent="parent">
+		<property name="name" value="我是子"></property>
+	</bean>
+	
+	
+	
+	
+	<!-- t默认情况下bean对象创建的顺序是从上到下的顺序       
+		depend-on="b,c" 这里是设定依赖
+	 t -->
+	
+	
+	
+	
+	<bean id="car" class="com.atgugui.pojo.Car">
+		<property name="carNo" value="京B531212" />
+		<property name="name" value="冰利"/>
+	</bean>
+	<!-- 
+		autowire 属性设置是否自动查找bean对象 并给子对象赋值 
+		byName 是指通过属性名作为id来查找bean对象， 并注入
+		找到就注入
+		没有就不注入 为空
+		byType 是指按属性的类型进行查找
+		找到多个报错
+		没有找到就报错
+		constructor 通过构造器查找并注入
+			1.先按照构造器参数类型进行查找并注入
+			2.如果按类型查找多个， 接着按参数名作为id继续查找并注入
+			3.按照id查找不到， 就不赋值
+	-->
+	<bean id="p19" class="com.atgugui.pojo.Person" autowire="constructor">
+		<property name="name" value="p19"></property>	
+	</bean>
+	
+	
+	
+
+
+<!-- 
+	prototype   属性设置对象的域
+		singleton     表示单例
+				Spring容器在创建的时候就会创建bean对象
+				每次调用getBean都返回spring容器中的对象
+		prototype     表示多例
+				多例在spring容器创建的时候， 不会跟着一起呗创建
+				每次调用getBean就会创建一个Bean对象
+		request   在一次请求中， 多个调用getBean对象都是返回同一个实例
+				getBean（“p20”）			request.getAttribute("P20");
+				Object bean = request.getAttribute("P20");
+				if(bean == null){
+					bean = new 对象();
+					request.setAttribute("p20",bean);
+				}
+				return bean;
+		session		在一个会话中 返回同一个实例
+				Object bean = request.getAttribute("P20");
+				if(bean == null){
+					bean = new 对象();
+					session.setAttribute("p20",bean);
+				}
+				return bean;
+			
+
+
+	<bean id="p20" class="com.atgugui.pojo.Person" scope="singleton">
+		<property name="name" value="p20" />
+	</bean>
+
+ -->
+
+
+
+
+
+
+
+
+
+<!-- 
+	init-method配置初始化方法（bean对象创建之后）
+	destroy-method 配置销毁方法  在Spring容器关闭的时候
+
+	<bean id="p21" class="com.atgugui.pojo.Person" init-method="init" destroy-method="destroy">
+		<property name="name" value="p21" />
+	</bean>
+	<bean class="com.atgugui.postprocessor.MyBeanProcessor"></bean>
+
+ -->
+
+
+
+
+
+
+
+
+
+<!-- EL ways -->
+
+	<bean id="carc" class="com.atgugui.pojo.Car">
+		<property name="carNo" value="京B531212" />
+		<property name="name" value="冰利"/>
+	</bean>
+	<bean id="person" class="com.atgugui.pojo.Person">
+
+<!-- 实验26：[SpEL测试I]在SpEL中使用字面量 -->
+<!-- 使用格式：#{数值} 		#{“字符串” || ‘字符串’} -->
+<!-- 		<property name="id" value="#{100}" /> -->
+<!-- 		<property name="name" value="#{'我是SpringEL输出的字符串'}" /> -->
+<!-- 实验27：[SpEL测试II]在SpEL中引用其他bean -->
+<!-- 使用格式：#{bean的id} -->
+		<property name="car" value="#{carc}"></property>
+<!-- 实验28：[SpEL测试III]在SpEL中引用其他bean的某个属性值 -->
+<!-- 使用格式： #{bean.属性名} -->
+<!-- 		<property name="name" value="#{car.name}"></property> -->
+<!-- 实验29：[SpEL测试IV]在SpEL中调用非静态方法 -->
+<!-- 使用格式： #{bean.方法名(参数)} -->
+<!-- 		<property name="name" value="#{carc.fun()}"></property> -->
+<!-- 实验30：[SpEL测试V]在SpEL中调用静态方法 -->
+<!-- 使用格式：#{T(全名类).方法名(参数)} -->
+		<property name="name" value="#{T(com.atgugui.pojo.Car).staticFun()}"></property>
+
+<!-- 实验31：[SpEL测试VI]在SpEL中使用运算符 -->
+<!-- 使用格式：#{表达式} -->
+		<property name="id" value="#{10000 * 10}" />
+	</bean> 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
